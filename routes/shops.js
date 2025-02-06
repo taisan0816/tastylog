@@ -7,10 +7,15 @@ router.get("/:id", async (req, res, next) => {
         MYSQLClient.executeQuery(
             await sql("SELECT_SHOP_DETAIL_BY_ID"),
             [id]
+        ),
+        MYSQLClient.executeQuery(
+            await sql("SELECT_SHOP_REVIEW_BY_SHOP_ID"),
+            [id]
         )
     ]).then((results) => {
         console.log(results);
         let data = results[0][0];
+        data.reviews = results[1] || [];
         res.render("./shops/index.ejs",data);
     }).catch((err) => {
         console.log(err);
