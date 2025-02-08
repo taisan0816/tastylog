@@ -1,14 +1,14 @@
 const router = require("express").Router();
-const { MYSQLClient, sql } = require("../lib/database/client.js");
+const { MySQLClient, sql } = require("../lib/database/client.js");
 router.get("/:id", async (req, res, next) => {
     let id = req.params.id;
 
     Promise.all([
-        MYSQLClient.executeQuery(
+        MySQLClient.executeQuery(
             await sql("SELECT_SHOP_DETAIL_BY_ID"),
             [id]
         ),
-        MYSQLClient.executeQuery(
+        MySQLClient.executeQuery(
             await sql("SELECT_SHOP_REVIEW_BY_SHOP_ID"),
             [id]
         )
