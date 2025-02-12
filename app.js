@@ -28,6 +28,10 @@ app.use("/public",express.static(path.join(__dirname, "/public")));
 //静的コンテンツのログは不要なので、そのあとに書く
 app.use(accesslogger());
 
+// Set middleware
+app.use(express.urlencoded({extended: true}));
+
+
 // Dynamic resource rooting
 app.use("/account", require("./routes/account.js"));
 app.use("/search", require("./routes/search.js"));
